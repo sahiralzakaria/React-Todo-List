@@ -9,6 +9,10 @@ import Divider from '@mui/material/Divider';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+// Components
+import ToDo from './ToDo';
+
+
 export default function ToDoList() {
   return (
       <Container maxWidth="sm">
@@ -35,8 +39,12 @@ export default function ToDoList() {
         غير المنجز
       </ToggleButton>
 
-    </ToggleButtonGroup>
-          {/* ===Filter Button=== */}
+          </ToggleButtonGroup>
+          {/* ===Filter Buttons=== */}
+
+          {/* ALL ToDos */}
+          <ToDo/>
+          {/* === ALL ToDos === */}
         </Typography>
       </CardContent>
       <CardActions>
