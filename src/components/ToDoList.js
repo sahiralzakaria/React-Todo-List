@@ -12,15 +12,34 @@ import Button from "@mui/material/Button";
 // Components
 import ToDo from "./ToDo";
 
+// OTHERS
+import { v4 as uuidv4 } from "uuid";
+
 const todos = [
   {
-    id: 1,
+    id: uuidv4(),
     title: "قراءة كتاب",
     details: "sssssssssssssssssssssssss",
     isCompleted: false,
   },
+  {
+    id: uuidv4(),
+    title: "رياضة",
+    details: "ddddddddddddddddddddddddd",
+    isCompleted: false,
+  },
+  {
+    id: uuidv4(),
+    title: "Conding",
+    details: "fdgdfgdfhddhdfh",
+    isCompleted: false,
+  },
 ];
 export default function ToDoList() {
+  const todosJsx = todos.map((t) => {
+    return <ToDo key={t.id} title={t.title} details={t.details} />;
+  });
+
   return (
     <Container maxWidth="md">
       <Card sx={{ minWidth: 275 }}>
@@ -42,7 +61,7 @@ export default function ToDoList() {
             </ToggleButtonGroup>
             {/* ===Filter Buttons=== */}
             {/* ALL ToDos */}
-            <ToDo />
+            {todosJsx}
             {/* === ALL ToDos === */}
             {/* Input + Add Button */}
             <Grid container spacing={2} style={{ marginTop: "20px" }}>
