@@ -6,10 +6,20 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
+import Grid from "@mui/material/GridLegacy";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 // Components
 import ToDo from "./ToDo";
 
+const todos = [
+  {
+    id: 1,
+    title: "قراءة كتاب",
+    details: "sssssssssssssssssssssssss",
+    isCompleted: false,
+  },
+];
 export default function ToDoList() {
   return (
     <Container maxWidth="md">
@@ -34,6 +44,39 @@ export default function ToDoList() {
             {/* ALL ToDos */}
             <ToDo />
             {/* === ALL ToDos === */}
+            {/* Input + Add Button */}
+            <Grid container spacing={2} style={{ marginTop: "20px" }}>
+              <Grid
+                item
+                xs={8}
+                display="flex"
+                justifyContent="space-around"
+                alignItems="center"
+              >
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label="عنوان المهمة"
+                  variant="outlined"
+                />
+              </Grid>
+
+              <Grid
+                item
+                xs={4}
+                display="flex"
+                justifyContent="space-around"
+                alignItems="center"
+              >
+                <Button
+                  style={{ width: "100%", height: "100%" }}
+                  variant="contained"
+                >
+                  إضافة
+                </Button>
+              </Grid>
+            </Grid>
+            {/* === Input + Add Button === */}
           </Typography>
         </CardContent>
       </Card>
