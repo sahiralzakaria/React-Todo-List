@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Grid from "@mui/material/GridLegacy";
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 // Components
@@ -14,8 +14,9 @@ import ToDo from "./ToDo";
 
 // OTHERS
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
-const todos = [
+const initialTodos = [
   {
     id: uuidv4(),
     title: "قراءة كتاب",
@@ -36,10 +37,21 @@ const todos = [
   },
 ];
 export default function ToDoList() {
+  const [todos, setTodos] = useState(initialTodos);
+  const [titleInput, setTitleInput] = useState("");
   const todosJsx = todos.map((t) => {
     return <ToDo key={t.id} title={t.title} details={t.details} />;
   });
+  function handleAddClick() {
+    const newTodo = {
+      id: uuidv4(),
+      title: titleInput,
+      details: "",
+      isCompleted: false,
+    };
 
+    setTodos([...todos, newTodo]);
+  }
   return (
     <Container maxWidth="md">
       <Card sx={{ minWidth: 275 }}>
@@ -77,6 +89,10 @@ export default function ToDoList() {
                   id="outlined-basic"
                   label="عنوان المهمة"
                   variant="outlined"
+                  value={titleInput}
+                  onChange={(e) => {
+                    setTitleInput(e.target.value);
+                  }}
                 />
               </Grid>
 
@@ -84,12 +100,15 @@ export default function ToDoList() {
                 item
                 xs={4}
                 display="flex"
-                justifyContent="space-around"
+                justifyContent="center"
                 alignItems="center"
               >
                 <Button
                   style={{ width: "100%", height: "100%" }}
                   variant="contained"
+                  onClick={() => {
+                    handleAddClick();
+                  }}
                 >
                   إضافة
                 </Button>
