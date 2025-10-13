@@ -38,7 +38,7 @@
 }
 
 .iconButton{
-  transition: all 0.2s !important;
+  transition: all 0.5s !important;
 }
 .iconButton:hover {
   background-color: rgb(0, 255, 234) !important; 
@@ -47,13 +47,13 @@
 }
 
 .todoCard{
-  transition: all 0.4s !important;
+  transition: all 0.5s !important;
   
 }
 
 .todoCard:hover{
-  padding-top: 20px;
-  padding-bottom: 20px;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
   box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.6);
 
 }

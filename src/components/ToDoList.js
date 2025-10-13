@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/GridLegacy";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 // Components
@@ -39,8 +39,19 @@ const initialTodos = [
 export default function ToDoList() {
   const [todos, setTodos] = useState(initialTodos);
   const [titleInput, setTitleInput] = useState("");
+
+  function handleCheckClick(todoID) {
+    const updatedTodos = todos.map((t) => {
+      if (t.id === todoID) {
+        t.isCompleted = !t.isCompleted;
+      }
+      return t;
+    });
+    setTodos(updatedTodos);
+  }
+
   const todosJsx = todos.map((t) => {
-    return <ToDo key={t.id} title={t.title} details={t.details} />;
+    return <ToDo key={t.id} todo={t} handleCheck={handleCheckClick} />;
   });
   function handleAddClick() {
     const newTodo = {
@@ -51,6 +62,7 @@ export default function ToDoList() {
     };
 
     setTodos([...todos, newTodo]);
+    setTitleInput("");
   }
   return (
     <Container maxWidth="md">

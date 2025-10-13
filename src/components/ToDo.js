@@ -9,7 +9,10 @@ import CheckIcon from "@mui/icons-material/Check";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
-export default function ToDo({ title, details }) {
+export default function ToDo({ todo, handleCheck }) {
+  function handleCheckClick() {
+    handleCheck(todo.id);
+  }
   return (
     <>
       <Card
@@ -25,10 +28,10 @@ export default function ToDo({ title, details }) {
           <Grid container spacing={2} style={{ padding: 0, margin: 0 }}>
             <Grid item xs={8}>
               <Typography variant="h5" style={{ textAlign: "right" }}>
-                {title}
+                {todo.title}
               </Typography>
               <Typography variant="h6" style={{ textAlign: "right" }}>
-                {details}
+                {todo.details}
               </Typography>
             </Grid>
             {/* Actions Buttons */}
@@ -38,16 +41,21 @@ export default function ToDo({ title, details }) {
               justifyContent="space-around"
               alignItems="center"
             >
+              {/* CHECK ICON BUTTON */}
               <IconButton
+                onClick={() => {
+                  handleCheckClick();
+                }}
                 className="iconButton"
                 aria-label="check"
                 style={{
-                  color: "#529a00ff",
-                  background: "white",
+                  color: todo.isCompleted ? "white" : "#529a00ff",
+                  background: todo.isCompleted ? "#529a00ff" : "white",
                   border: "solid #529a00ff 3px",
                 }}
               >
                 <CheckIcon />
+                {/* === CHECK ICON BUTTON === */}
               </IconButton>
               <IconButton
                 className="iconButton"
