@@ -43,6 +43,13 @@ export default function ToDo({ todo, handleCheck }) {
   function handleClose() {
     setShowDeleteDialog(false);
   }
+  function handleDeleteConfirm() {
+    const updatedTodos = todos.filter((t) => {
+      return t.id != todo.id;
+    });
+
+    setTodos(updatedTodos);
+  }
 
   // === EVENT HANDLERS ===
   return (
@@ -73,8 +80,10 @@ export default function ToDo({ todo, handleCheck }) {
             justifyContent: "center",
           }}
         >
-          <Button>إغلاق</Button>
-          <Button autoFocus>تأكيد الحذف</Button>
+          <Button onClick={handleClose}>إغلاق</Button>
+          <Button autoFocus onClick={handleDeleteConfirm}>
+            تأكيد الحذف
+          </Button>
         </DialogActions>
       </Dialog>
       {/* === DELETE DIALOG === */}
