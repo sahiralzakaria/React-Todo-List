@@ -49,23 +49,32 @@ export default function ToDo({ todo, handleCheck }) {
     <>
       {/* DELETE DIALOG */}
       <Dialog
+        style={{ direction: "rtl" }}
         onClose={handleClose}
         open={showDeleteDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          هل أنت متأكد من حذف هذه المهمة ؟
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+          <DialogContentText
+            id="alert-dialog-description"
+            style={{ textAlign: "center" }}
+          >
+            لا يمكنك التراجع عن الحذف بعد إتمامه
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button>Disagree</Button>
-          <Button autoFocus>Agree</Button>
+        <DialogActions
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button>إغلاق</Button>
+          <Button autoFocus>تأكيد الحذف</Button>
         </DialogActions>
       </Dialog>
       {/* === DELETE DIALOG === */}
