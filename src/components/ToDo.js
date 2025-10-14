@@ -25,6 +25,10 @@ import Button from "@mui/material/Button";
 export default function ToDo({ todo, handleCheck }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+  const [updatedTodo, setUpdatedTodo] = useState({
+    title: todo.title,
+    details: todo.details,
+  });
   const [todos, setTodos] = useContext(TodosContext);
 
   // EVENT HANDLERS
@@ -59,12 +63,15 @@ export default function ToDo({ todo, handleCheck }) {
     setTodos(updatedTodos);
   }
   function handleUpdateConfirm() {
-    alert("Update");
-    // const updatedTodos = todos.filter((t) => {
-    //   return t.id != todo.id;
-    // });
-
-    // setTodos(updatedTodos);
+    const updatedTodos = todos.map((t) => {
+      if (t.id == todo.id) {
+        return { ...t, title: updatedTodo.title, details: updatedTodo.details };
+      } else {
+        return t;
+      }
+    });
+    setTodos(updatedTodos);
+    setShowUpdateDialog(false);
   }
 
   // === EVENT HANDLERS ===
@@ -124,6 +131,10 @@ export default function ToDo({ todo, handleCheck }) {
             label="عنوان المهمة"
             fullWidth
             variant="standard"
+            value={updatedTodo.title}
+            onChange={(e) => {
+              setUpdatedTodo({ ...updatedTodo, title: e.target.value });
+            }}
           />
           <TextField
             autoFocus
@@ -134,6 +145,10 @@ export default function ToDo({ todo, handleCheck }) {
             label="التفاصيل"
             fullWidth
             variant="standard"
+            value={updatedTodo.details}
+            onChange={(e) => {
+              setUpdatedTodo({ ...updatedTodo, details: e.target.value });
+            }}
           />
         </DialogContent>
         <DialogActions
@@ -192,6 +207,7 @@ export default function ToDo({ todo, handleCheck }) {
                 <CheckIcon />
                 {/* === CHECK ICON BUTTON === */}
               </IconButton>
+              {/* UPDATE BUTTON */}
               <IconButton
                 className="iconButton"
                 aria-label="check"
@@ -204,6 +220,7 @@ export default function ToDo({ todo, handleCheck }) {
               >
                 <ModeEditOutlineOutlinedIcon />
               </IconButton>
+              {/* === UPDATE BUTTON === */}
 
               {/* DELETE BUTTON */}
               <IconButton
