@@ -2,13 +2,38 @@ import "./App.css";
 import ToDoList from "./components/ToDoList";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+import { TodosContext } from "./contexts/TodosContext";
+import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 const theme = createTheme({
   typography: {
     fontFamily: "Alexandria",
   },
 });
 
+const initialTodos = [
+  {
+    id: uuidv4(),
+    title: "قراءة كتاب",
+    details: "sssssssssssssssssssssssss",
+    isCompleted: false,
+  },
+  {
+    id: uuidv4(),
+    title: "رياضة",
+    details: "ddddddddddddddddddddddddd",
+    isCompleted: false,
+  },
+  {
+    id: uuidv4(),
+    title: "Conding",
+    details: "fdgdfgdfhddhdfh",
+    isCompleted: false,
+  },
+];
+
 function App() {
+  const [todos, setTodos] = useState(initialTodos);
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -19,7 +44,9 @@ function App() {
           direction: "rtl",
         }}
       >
-        <ToDoList />
+        <TodosContext.Provider value={[todos, setTodos]}>
+          <ToDoList />
+        </TodosContext.Provider>
       </div>
     </ThemeProvider>
   );

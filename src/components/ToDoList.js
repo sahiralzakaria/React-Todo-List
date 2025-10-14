@@ -13,45 +13,17 @@ import Button from "@mui/material/Button";
 import ToDo from "./ToDo";
 
 // OTHERS
-import { v4 as uuidv4 } from "uuid";
+import { TodosContext } from "../contexts/TodosContext";
+import { useContext } from "react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const initialTodos = [
-  {
-    id: uuidv4(),
-    title: "قراءة كتاب",
-    details: "sssssssssssssssssssssssss",
-    isCompleted: false,
-  },
-  {
-    id: uuidv4(),
-    title: "رياضة",
-    details: "ddddddddddddddddddddddddd",
-    isCompleted: false,
-  },
-  {
-    id: uuidv4(),
-    title: "Conding",
-    details: "fdgdfgdfhddhdfh",
-    isCompleted: false,
-  },
-];
 export default function ToDoList() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useContext(TodosContext);
   const [titleInput, setTitleInput] = useState("");
 
-  function handleCheckClick(todoID) {
-    const updatedTodos = todos.map((t) => {
-      if (t.id === todoID) {
-        t.isCompleted = !t.isCompleted;
-      }
-      return t;
-    });
-    setTodos(updatedTodos);
-  }
-
   const todosJsx = todos.map((t) => {
-    return <ToDo key={t.id} todo={t} handleCheck={handleCheckClick} />;
+    return <ToDo key={t.id} todo={t} />;
   });
   function handleAddClick() {
     const newTodo = {

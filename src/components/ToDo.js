@@ -9,12 +9,66 @@ import CheckIcon from "@mui/icons-material/Check";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
+// Others
+import { TodosContext } from "../contexts/TodosContext";
+import { useContext, useState } from "react";
+
+// DIALOG IMPORTS
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+
 export default function ToDo({ todo, handleCheck }) {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [todos, setTodos] = useContext(TodosContext);
+
+  // EVENT HANDLERS
+
   function handleCheckClick() {
-    handleCheck(todo.id);
+    const updatedTodos = todos.map((t) => {
+      if (t.id === todo.id) {
+        t.isCompleted = !t.isCompleted;
+      }
+      return t;
+    });
+    setTodos(updatedTodos);
   }
+
+  function handleDeleteClick() {
+    setShowDeleteDialog(true);
+  }
+  function handleClose() {
+    setShowDeleteDialog(false);
+  }
+
+  // === EVENT HANDLERS ===
   return (
     <>
+      {/* DELETE DIALOG */}
+      <Dialog
+        onClose={handleClose}
+        open={showDeleteDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button>Disagree</Button>
+          <Button autoFocus>Agree</Button>
+        </DialogActions>
+      </Dialog>
+      {/* === DELETE DIALOG === */}
       <Card
         className="todoCard"
         sx={{
@@ -68,6 +122,8 @@ export default function ToDo({ todo, handleCheck }) {
               >
                 <ModeEditOutlineOutlinedIcon />
               </IconButton>
+
+              {/* DELETE BUTTON */}
               <IconButton
                 className="iconButton"
                 aria-label="check"
@@ -76,9 +132,11 @@ export default function ToDo({ todo, handleCheck }) {
                   background: "white",
                   border: "solid #b30000ff 3px",
                 }}
+                onClick={handleDeleteClick}
               >
                 <DeleteOutlineOutlinedIcon />
               </IconButton>
+              {/* === DELETE BUTTON === */}
             </Grid>
             {/* === Actions Buttons === */}
           </Grid>
