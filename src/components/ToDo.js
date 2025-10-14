@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import TextField from "@mui/material/TextField";
 
 // Others
 import { TodosContext } from "../contexts/TodosContext";
@@ -23,6 +24,7 @@ import Button from "@mui/material/Button";
 
 export default function ToDo({ todo, handleCheck }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showUpdateDialog, setShowUpdateDialog] = useState(false);
   const [todos, setTodos] = useContext(TodosContext);
 
   // EVENT HANDLERS
@@ -40,8 +42,14 @@ export default function ToDo({ todo, handleCheck }) {
   function handleDeleteClick() {
     setShowDeleteDialog(true);
   }
-  function handleClose() {
+  function handleUpdateClick() {
+    setShowUpdateDialog(true);
+  }
+  function handleDeleteDialogClose() {
     setShowDeleteDialog(false);
+  }
+  function handleUpdateDialogClose() {
+    setShowUpdateDialog(false);
   }
   function handleDeleteConfirm() {
     const updatedTodos = todos.filter((t) => {
@@ -50,14 +58,23 @@ export default function ToDo({ todo, handleCheck }) {
 
     setTodos(updatedTodos);
   }
+  function handleUpdateConfirm() {
+    alert("Update");
+    // const updatedTodos = todos.filter((t) => {
+    //   return t.id != todo.id;
+    // });
+
+    // setTodos(updatedTodos);
+  }
 
   // === EVENT HANDLERS ===
   return (
     <>
       {/* DELETE DIALOG */}
+
       <Dialog
         style={{ direction: "rtl" }}
-        onClose={handleClose}
+        onClose={handleDeleteDialogClose}
         open={showDeleteDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -80,13 +97,59 @@ export default function ToDo({ todo, handleCheck }) {
             justifyContent: "center",
           }}
         >
-          <Button onClick={handleClose}>إغلاق</Button>
+          <Button onClick={handleDeleteDialogClose}>إغلاق</Button>
           <Button autoFocus onClick={handleDeleteConfirm}>
             تأكيد الحذف
           </Button>
         </DialogActions>
       </Dialog>
       {/* === DELETE DIALOG === */}
+
+      {/* UPDATE DIALOG */}
+      <Dialog
+        style={{ direction: "rtl" }}
+        onClose={handleUpdateDialogClose}
+        open={showUpdateDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">تعديل المهمة</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="email"
+            label="عنوان المهمة"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="email"
+            label="التفاصيل"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={handleUpdateDialogClose}>إغلاق</Button>
+          <Button autoFocus onClick={handleUpdateConfirm}>
+            تأكيد
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* === UPDATE DIALOG === */}
       <Card
         className="todoCard"
         sx={{
@@ -137,6 +200,7 @@ export default function ToDo({ todo, handleCheck }) {
                   background: "white",
                   border: "solid #3f3cffff 3px",
                 }}
+                onClick={handleUpdateClick}
               >
                 <ModeEditOutlineOutlinedIcon />
               </IconButton>
