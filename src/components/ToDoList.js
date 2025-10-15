@@ -14,8 +14,7 @@ import ToDo from "./ToDo";
 
 // OTHERS
 import { TodosContext } from "../contexts/TodosContext";
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function ToDoList() {
@@ -25,6 +24,12 @@ export default function ToDoList() {
   const todosJsx = todos.map((t) => {
     return <ToDo key={t.id} todo={t} />;
   });
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(storageTodos);
+  }, []);
+
   function handleAddClick() {
     const newTodo = {
       id: uuidv4(),
@@ -37,6 +42,7 @@ export default function ToDoList() {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTitleInput("");
   }
+
   return (
     <Container maxWidth="md">
       <Card sx={{ minWidth: 275 }}>
