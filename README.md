@@ -1,17 +1,17 @@
-# ✅ React Todo List
+# React Todo List
 
 A modern **React.js** to-do list app built with **Material UI (MUI)** and Arabic interface support (RTL).  
 The app allows you to manage your daily tasks — add, edit, delete, and mark them as completed — all with a clean and elegant design.
 
 ---
 
-## 🖼️ UI Preview
+## UI Preview
 
 ![Screenshot](./src/assets/1.png)
 
 ---
 
-## 🚀 Overview
+## Overview
 
 This app provides a simple yet powerful way to organize your tasks:
 
@@ -24,7 +24,7 @@ This app provides a simple yet powerful way to organize your tasks:
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 - **React.js** – For building the UI
 - **Material UI (MUI)** – For cards, buttons, dialogs, icons, and grid layout
@@ -34,7 +34,7 @@ This app provides a simple yet powerful way to organize your tasks:
 
 ---
 
-## 🧩 Components
+## Components
 
 - **App.js** → Wraps the app in a ThemeProvider and TodosContext
 - **ToDoList.js** → Displays all tasks, filters, and the add-task input
@@ -43,7 +43,7 @@ This app provides a simple yet powerful way to organize your tasks:
 
 ---
 
-## 🎨 Features & Design
+## Features & Design
 
 - Fully **Right-to-Left (RTL)** layout for Arabic users
 - Elegant **Material Design** cards with shadows and rounded corners
@@ -52,7 +52,7 @@ This app provides a simple yet powerful way to organize your tasks:
 
 ---
 
-## 💻 Run Locally
+## Run Locally
 
 ```bash
 git clone https://github.com/sahiralzakaria/React-Todo-List.git
@@ -65,7 +65,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🧠 Future Improvements
+## Future Improvements
 
 - Add due dates for tasks
 - Support task categories and priorities
@@ -74,7 +74,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/sahiralzakaria) **GitHub:** [sahiralzakaria](https://github.com/sahiralzakaria)
 - [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sahir-zakaria-39873531b) **LinkedIn:** [sahir-zakaria](https://www.linkedin.com/in/sahir-zakaria-39873531b)
