@@ -20,8 +20,27 @@ import { v4 as uuidv4 } from "uuid";
 export default function ToDoList() {
   const [todos, setTodos] = useContext(TodosContext);
   const [titleInput, setTitleInput] = useState("");
+  const [displayedTodosType, setDisplayedTodosType] = useState("all");
 
-  const todosJsx = todos.map((t) => {
+  // Filteration arrays
+  const completedTodos = todos.filter((t) => {
+    return t.isCompleted;
+  });
+
+  const notCompletedTodos = todos.filter((t) => {
+    return !t.isCompleted;
+  });
+
+  let todosToBeRendered = todos;
+  if (displayedTodosType == "completed") {
+    todosToBeRendered = completedTodos;
+  } else if (displayedTodosType == "none-completed") {
+    todosToBeRendered = notCompletedTodos;
+  } else {
+    todosToBeRendered = todos;
+  }
+
+  const todosJsx = todosToBeRendered.map((t) => {
     return <ToDo key={t.id} todo={t} />;
   });
 
@@ -46,6 +65,9 @@ export default function ToDoList() {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTitleInput("");
   }
+  function changeDisplayedType(e) {
+    setDisplayedTodosType(e.target.value);
+  }
 
   return (
     <Container maxWidth="md">
@@ -56,15 +78,15 @@ export default function ToDoList() {
             <Divider />
             {/* Filter Buttons */}
             <ToggleButtonGroup
-              // value={alignment}
+              value={displayedTodosType}
               exclusive
-              // onChange={handleAlignment}
+              onChange={changeDisplayedType}
               aria-label="text alignment"
               style={{ direction: "ltr" }}
             >
-              <ToggleButton value="left">الكل</ToggleButton>
-              <ToggleButton value="center">المنجز</ToggleButton>
-              <ToggleButton value="right">غير المنجز</ToggleButton>
+              <ToggleButton value="none-completed">غير المنجز</ToggleButton>
+              <ToggleButton value="completed">المنجز</ToggleButton>
+              <ToggleButton value="all">الكل</ToggleButton>
             </ToggleButtonGroup>
             {/* ===Filter Buttons=== */}
             {/* ALL ToDos */}
