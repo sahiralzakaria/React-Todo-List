@@ -9,6 +9,12 @@ const theme = createTheme({
   typography: {
     fontFamily: "Alexandria",
   },
+
+  palette: {
+    primary: {
+      main: "#004d40",
+    },
+  },
 });
 
 const initialTodos = [];
@@ -23,6 +29,9 @@ function App() {
           height: "100vh",
           background: "#1e1e2f",
           direction: "rtl",
+
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <TodosContext.Provider value={[todos, setTodos]}>
