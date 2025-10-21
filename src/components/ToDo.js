@@ -81,6 +81,41 @@ export default function ToDo({ todo, handleCheck }) {
   // === EVENT HANDLERS ===
   return (
     <>
+      {/* DELETE DIALOG */}
+
+      <Dialog
+        style={{ direction: "rtl" }}
+        onClose={handleDeleteDialogClose}
+        open={showDeleteDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          هل أنت متأكد من حذف هذه المهمة ؟
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            id="alert-dialog-description"
+            style={{ textAlign: "center" }}
+          >
+            لا يمكنك التراجع عن الحذف بعد إتمامه
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={handleDeleteDialogClose}>إغلاق</Button>
+          <Button autoFocus onClick={handleDeleteConfirm}>
+            تأكيد الحذف
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* === DELETE DIALOG === */}
+
       {/* UPDATE DIALOG */}
       <Dialog
         style={{ direction: "rtl" }}
