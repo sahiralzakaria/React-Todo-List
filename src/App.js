@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { TodosContext } from "./contexts/TodosContext";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import MySnackBar from "./components/MySnackBar";
 const theme = createTheme({
   typography: {
     fontFamily: "Alexandria",
@@ -21,6 +22,14 @@ const initialTodos = [];
 
 function App() {
   const [todos, setTodos] = useState(initialTodos);
+  const [open, setOpen] = useState(true);
+
+  function showHideToast() {
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 2000);
+  }
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -34,6 +43,7 @@ function App() {
           alignItems: "center",
         }}
       >
+        <MySnackBar open={open} />
         <TodosContext.Provider value={[todos, setTodos]}>
           <ToDoList />
         </TodosContext.Provider>
