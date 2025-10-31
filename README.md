@@ -34,7 +34,6 @@ This app provides a simple yet powerful way to organize your tasks:
 
 ---
 
-
 ## Components
 
 - **App.js** → Wraps the app in a ThemeProvider and TodosContext
